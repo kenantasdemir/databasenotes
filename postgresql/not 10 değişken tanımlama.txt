@@ -1,0 +1,29 @@
+DO $$
+DECLARE
+a int := 1;
+BEGIN
+RAISE NOTICE ' girilen değişken : %', a ;
+END $$;
+
+
+DO $$
+DECLARE
+ a int := 1;
+ BEGIN
+ RAISE NOTICE '%' , a ;
+ END $$;
+
+DO $$
+DECLARE
+a int := 1;
+ b int := 2;
+ BEGIN
+ RAISE NOTICE'Birinci Degisken degeri : %' ,a;
+ RAISE NOTICE 'Ikinci Degisken degeri : %' ,b ;
+ END $$;
+
+
+//session bazlı değişken
+set session.my.vars.id = '1';
+select * from veliler
+where no = current_setting('my.vars.id')::int;

@@ -1,0 +1,229 @@
+CREATE DATABASE "databaseName"
+	WITH
+	OWNER = postgres
+	ENCODING='UTF8'
+	CONNECTION LIMIT = -1;
+//CONNECTION LIMIT = -1 ifadesi her kullanıcı için sınırsız bağlantı anlamına gelir
+
+
+COMMENT ON DATABASE "databaseName" IS 'aciklama1';
+//veritabanı üzerine yorum eklendi
+
+
+
+
+****************************************************************************************************************************
+
+CREATE DATABASE databaseName;
+//veritabanı oluşturuldu
+
+CREATE TABLE Companies(
+	ID INT,
+	NAME TEXT,
+	AGE INT,
+	ADDRESS CHAR(50),
+	PRICE REAL
+);
+//tablo oluştururken sütun adlarının karşısına bu sütüuna gelecek verilerin tipi belirtilir
+
+CREATE TABLE Employees(
+	ID INTEGER,
+	EmpName CHARACTER VARYING(256),
+	BirthDate DATE,
+	IsCurrentEmployee BIT(1)
+);
+
+CREATE TABLE Customers
+(
+	Name CHARACTER VARYING(256),
+	BirthDate DATE,
+	ZipCode CHARACTER VARYING(10)
+);
+
+
+CREATE TABLE backup1_countries AS (SELECT * FROM Countries) WITH NO DATA;
+SELECT * FROM backup1_countries ;
+//Countries tablo yapısı backup1_countries tablosuna aktarıldı.
+//WITH NO DATA opsiyonuyla Countries tablosundaki veriler aktarılmadı sadece sütun adı veri tipi bilgiler alındı
+
+CREATE TABLE backup2_countries AS (SELECT * FROM Countries)
+SELECT * FROM backup2_countries
+//Countries tablosunun tamamı backup2_countries içine aktarıldı
+
+CREATE TABLE backup3_countries AS SELECT * FROM Countries
+//yukarıdaki sorgunun aynısı bu şekilde de yazılabilir.
+
+****************************************************************************************************************************
+//otomatik artan veri
+
+
+CREATE TABLE tableName(
+	ID SERIAL
+);
+
+CREATE TABLE Kullanicilar(
+	ID SERIAL, //ID sütunu otomatik artacak
+	AD VARCHAR()
+);
+
+INSERT INTO Kullanicilar(Ad) VALUES('Kenan');
+//Kullanicilar tablosuna veri eklendi
+
+
+INSERT INTO Kullanicilar(ID,Ad) VALUES(DEFAULT,'Kenan');
+//DEFAULT ile id otomatik artmış oldu..
+
+SELECT currval(pg_get_serial_sequence('Kullanicilar','id'));
+//son eklenen satırın kimliğini döndürür.
+
+INSERT INTO Kullanicilar(Ad) VALUES('Cabbar') RETURNING id;
+//en son oluşturulan id'yi döner..
+
+****************************************************************************************************************************
+
+CREATE SEQUENCE demoTable_id_seq;
+
+CREATE TABLE demoTable(
+	id INTEGER DEFAULT nextval('demoTable_id_seq') //otomatik artan ID sütünu
+);
+
+INSERT INTO demoTable(Name) VALUES('Ali')
+
+****************************************************************************************************************************
+
+SELECT ... INTO ... FROM ... SORGULARI
+
+
+
+SELECT * FROM film;
+
+SELECT film_id, title, rental_rate INTO TABLE film_backup FROM film WHERE rating='R' AND rental_duration=5 ORDER BY title;
+//film tablosundan rating değeri R olan ve rental_duration=5 olan kayıtların film_id, title, rental_rate gibi bilgilerini film_backup tablosuna aktarır.
+//daha sonra title sütununa göre ASC(ARTAN) olarak sıralar.
+
+SELECT * FROM film_backup
+DROP TABLE film_backup
+
+
+---------------------------------------
+
+SELECT * FROM film;
+SELECT COUNT(*) FROM film WHERE length < 50;
+//length değeri 50 den küçük olan kayıtların sayısını döndürür.
+
+
+SELECT film_id, title, length INTO TEMP TABLE short_tvSeries FROM film WHERE length < 50
+//film tabosunda length değeri 50 den küçük olan kayıtların film_id,title,length değerlerini short_tvSeries isimli geçici tabloya kaydeder. 
+
+SELECT * FROM short_tvSeries
+SELECT * FROM short_tvSeries WHERE film_id=15;
+
+****************************************************************************************************************************
+
+---Geçici tablo oluşturmak
+
+
+CREATE DATABASE demoDB;
+
+CREATE TEMP TABLE demoTempTable(
+	id INT
+);
+
+//TEMP --> TEMPORARY
+
+SELECT * FROM demoTempTable;
+
+
+--kalıcı tablo
+CREATE TABLE importantTable(id SERIAL, name VARCHAR);
+
+--geçici tablo
+CREATE TEMP TABLE importantTable(id SERIAL, name VARCHAR)
+
+INSERT INTO importantTable(id,name) VALUES (DEFAULT,'Kenan')
+//VALUES içinde DEFAULT parametresiyle idsütunu otomatik artan olarak ayarlandı.
+
+SELECT * FROM importantTable
+
+****************************************************************************************************************************
+
+CREATE TABLE Users(
+	id INT
+);
+
+ALTER TABLE Users ADD gender CHAR(1)
+//yeni sütun ekler
+
+ALTER TABLE Users DROP gender;
+//gender isimli sütunu siler
+
+ALTER TABLE Users RENAME TO people;
+//tablo ismini people olarak değiştirdik
+
+ALTER TABLE "Users" ADD COLUMN "IsActive" BIT(1);
+//Users tablosuna türü BIT(1) olan yeni bir sütun ekledik.Sütun ismi IsActive
+
+CREATE TABLE link(
+	id SERIAL,  //SERIAL ile id alanının otomatik artacağını belirttik
+	title VARCHAR(500),
+	url VARCHAR(1024)
+);
+
+ALTER TABLE link ADD COLUMN active BOOLEAN;
+//link tablosuna tipi BOOLEAN olan yeni bir sütun ekledik stün ismi active
+
+SELECT * FROM link;
+
+ALTER TABLE link RENAME COLUMN title TO link_title;
+//link tablosundaki title sütunu link_title olarak değiştirildi.
+
+INSERT INTO link(link_title,url) VALUES('Kenan Tasdemir Blog','http://www.kenantasdemir.com')
+//link tablosuna örnek verieklendi.
+
+ALTER TABLE link RENAME TO urls;
+//tablo ismi değiştirildi
+
+CREATE TABLE author(
+	id INT,
+	fname VARCHAR(50),
+	lname VARCHAR(50)
+);
+
+DROP TABLE author;
+//author isimli tabloyu sildik
+
+DROP TABLE IF EXISTS author;
+//tabloyu silmeden önce böyle bir tablo var mı kontrol diyoruz. sonra siliyoruz
+
+
+****************************************************************************************************************************
+
+DROP DATABASE demodb;
+//demodb isimli veritabanını siler
+
+DROP DATABASE IF EXISTS demodb;
+//demodb isimli veritabanını siler.fakat önce böyle bir veritabanı var mık kontrol eder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

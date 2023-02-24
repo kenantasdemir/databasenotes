@@ -1,0 +1,122 @@
+PostgreSQL'de beş farklı join tipi vardır:
+
+Inner Join: İki tablo arasında eşleşen kayıtları döndürür.
+
+Left Outer Join: Sol taraftaki tablodaki tüm kayıtları ve sağ taraftaki tablodaki eşleşen kayıtları döndürür.
+
+Right Outer Join: Sağ taraftaki tablodaki tüm kayıtları ve sol taraftaki tablodaki eşleşen kayıtları döndürür.
+
+Full Outer Join: İki tablodaki tüm kayıtları döndürür, eşleşen olmayan kayıtlar NULL değeriyle doldurulur.
+
+Cross Join: İki tablonun her bir kaydını birbiriyle eşleştirerek sonuç kümesini döndürür.
+
+
+
+--INNER JOIN
+
+SELECT 
+	customers.customer_id, 
+	first_name, 
+	last_name, 
+	email, 
+	amount, 
+	payment_date 
+FROM customer
+INNER JOIN payment
+ON payment.customer_id = customers.customer_id;
+
+SELECT 
+	c.customer_id, 
+	c.first_name, 
+	c.last_name, 
+	c.email, 
+	p.amount, 
+	p.payment_date 
+FROM customer AS c
+INNER JOIN payment AS p
+ON p.customer_id = c.customer_id;
+
+FROM customer AS c
+INNER JOIN payment AS p
+ON p.customer_id = c.customer.id;
+
+
+**********************************************************************************************************************************************************************
+
+--LEFT JOIN
+
+SELECT
+	f.film_id,
+	f.title,
+	f.inventory_id
+FROM film AS f
+LEFT JOIN inventory AS i
+ON i.film_id = f.film_id
+WHERE i.film_id IS NOT NULL;
+
+**********************************************************************************************************************************************************************
+
+--RIGTH JOIN
+
+SELECT first_name, last_name, department_id FROM employees;
+
+SELECT 
+	e.first_name, 
+	e.last_name, 
+	e.department_id 
+FROM employees AS e
+RIGTH JOIN departments AS d
+ON d.department_id = e.department_id;
+
+**********************************************************************************************************************************************************************
+--FULL OUTER JOIN
+
+
+SELECT
+	e.employee_id,
+	e.first_name,
+	e.last_name,
+	e.department_id,
+	e.department_name
+FROM employees AS e
+FULL OUTER JOIN departments AS d
+ON d.department_id = e.department_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

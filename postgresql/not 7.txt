@@ -1,0 +1,142 @@
+SELECT CHAR_LENGTH('PostgreSQL');
+//verilen char karakterin uzunluğunu döner
+
+SELECT LENGTH("uzunluk");
+//verilen stringin uzunluğunu döner
+
+SELECT LOWER("MERHABA");
+//büyük harfleri küçük harfe dönüştürür.
+
+SELECT UPPER("nasilsin");
+//küçük harfleribüyük harfe dönüştürür.
+
+SELECT SUBSTR("kenantasdemir.com",2,4);
+//string ifadenin 2 karakterinden itibaren 4 karakterlik bir substring elde eder.
+
+SELECT SUBSTR("kenantasdemir.com",LENGTH('kenantasdemir.com')-2,4);
+
+SELECT POSITION('ha' in 'Merhaba');
+//ha string ifadenin Merhaba dizgesi içindeki konumunu dönderir.
+
+SELECT ASCII('A')
+SELECT ASCII('a')
+//verilen karakterlerin ASCII kodunu dönderir.
+
+SELECT CONCAT('metinsel',2,NULL,2);
+//verilen ifadeleri birleştirir. NULL ifadesini atlar.
+--metinsel22
+
+SELECT 'Post' || 'greSQL';
+//iki string ifade birleştirildi.
+
+SELECT 'Post' || NULL || 'greSQL';
+--NULL ile yapılan her işlem NULL ile sonuçlanır..
+
+SELECT 'Post' || 3 || 'greSQL';
+//verilen ifadeleri birleştirir.
+--Post3greSQL
+
+SELECT INITCAP('hi Hello');
+--Hi Hello çıktısını verir.(baş harfi büyük hale getirir.)
+
+SELECT REPEAT('hi',3);
+//string ifadeti 3 kere ard arda yazdırır.
+
+SELECT REVERSE('olleh');
+//verilen string ifadeyi tersine çevirir.
+
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM film;
+//tablodaki tüm kayıtları çeker
+
+SELECT COUNT(*) FROM film;
+//film tablosundaki kayıtların sayısını döndürür.
+
+SELECT COUNT(film_id) FROM film;
+//film tablosundaki kayıtlardan film_id sütununda yer alan kayıtların sayısı döndürür.
+
+SELECT * FROM payment;
+//payment tablosundaki bütün verileri getirir.
+
+SELECT COUNT(DISTINCT amount) FROM payment;
+//payment tablosundaki amount sütununda eşsiz olan verilerin sayısını döndürür.
+
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM film;
+
+SELECT replacement_cost FROM film;
+
+SELECT MAX(amount) FROM payment;
+//payment tablosunda amount sütunundaki en büyük veriyi verir.
+
+SELECT MIN(amount) FROM payment;
+//payment tablosunda amount sütunundaki en küçük veriyi verir.
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM payment;
+//payment tablosunaki tüm verileri getirir.
+
+SELECT SUM(amount) FROM payment;
+//payment tablosunda amount sütunundaki verilerin toplamını verir.
+
+SELECT SUM(amount) AS ToplamCiro FROM payment;
+//payment tablosunda yer alan amount sütunun toplamını dönderir
+//bunu da ToplamCiro takma isimli sütuna yazdırır.
+
+SELECT SUM(DISTINCT amount) AS ToplamCiro FROM payment;
+//payment tablosunda yer alan amount sütununun eşssiz kayıtlarının toplamını döner
+//ToplamCiro takma isimli sütuna yazdırır.
+
+
+SELECT amount FROM payment;
+//payment tablosundaki amount sütununa ait verileri getirir.
+
+SELECT SUM(DISTINCT customer_id) FROM payment;
+//payment tablsunda customer_id değeri eşsiz olan kayıtların id değerlerinin toplamını verir.
+
+
+******************************************************************************************************************************************************************************
+
+SELECT AVG(price) AS X FROM film;
+//price sütunundaki verilerin ortalamasını alır X takma isimli sütunun altına yazar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

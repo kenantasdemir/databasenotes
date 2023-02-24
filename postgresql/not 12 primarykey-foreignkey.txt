@@ -1,0 +1,13 @@
+CREATE TABLE Customers(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50),
+	email VARCHAR(50),
+	phone VARCHAR(20)
+);
+
+CREATE TABLE Orders(
+	id SERIAL PRIMARY KEY,
+	order_date DATE,
+	customer_id INTEGER REFERENCES Customer(id),  --> FOREIGN KEY
+	total_amount NUMERIC(10,2)
+);

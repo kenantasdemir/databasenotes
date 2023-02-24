@@ -1,0 +1,52 @@
+DROP TABLE IF EXISTS Users;
+
+CREATE TABLE Users(
+	id INT,
+	Name VARCHAR(20),
+);
+
+INSERT INTO Users VALUES(7,'Hakki');
+
+INSERT INTO Users(id,name) VALUES(2,'Ali Veli');
+
+INSERT INTO Users(id,name) VALUES(10,'Mustafa'),
+				(11,'Cihan'),
+				(12,'Ramazan');
+
+SELECT * FROM Users;
+
+************************************************************************************************************************************************************************
+
+SELECT * FROM Users ORDER BY id;
+
+UPDATE Users SET name='Veli Ali' WHERE id=5;
+//Users tablosunda id değeri 5 olan kaydın name değeri "Veli Ali" olarak güncellendi.
+
+
+************************************************************************************************************************************************************************
+
+DROP FROM Users;
+//tablodaki verileri siler
+
+DROP FROM users WHERE id=5;
+//users tablosunda id değeri 5 olan kaydı siler.
+
+************************************************************************************************************************************************************************
+
+TRUNCATE TABLE table_name
+//tablodaki tüm veriyi siler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
