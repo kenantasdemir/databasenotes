@@ -1,0 +1,12 @@
+pg_dump TBLOGRENCILER > TBLOGRENCILER_BACKUP.sql
+--veritabanı yedeklemek için pg_dump aracı kullanılır.
+
+pg_restore -C -d TBLOGRENCILER TBLOGRENCILER_BACKUP.sql
+--  // -C seçeneği yedek dosyasında olmmayan bir veritabanı varsa otomatik olarak oluşturulmasını sağlar.
+--- // -d seçeneği hangiveritabanına geri yükleme yapılacağını belirlemek iin kullanılır.
+
+
+pg_dump mydatabase | gzip > mydatabase_backup.sql.gz
+// -- sıkıştırılmışbir şekilde veritabanı yedeği almakiçin gzip kullanılır.
+
+
