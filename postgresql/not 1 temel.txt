@@ -75,7 +75,11 @@ SELECT * FROM employees ORDER BY employee_id DESC;
 ***********************************************************************************************************************************************************************
 
 SELECT DISTINCT film_id FROM inventory ORDER BY film_id ASC
+//DISTINCT anahtar kelimesi ile tabloda belirtilen sütundaki verilerde, eğer aynı veriden birden fazla varsa onlardan sadece birer örek alır. 
 //inventory tablosundaki verilerin film_id değerleri aynı olan kayıtlardan sadece bir tanesini çekerek film_id değerine göre ASC(artan) olarak sıralar.
+
+SELECT COUNT(DISTINCT film_id) FROM inventory
+//inventory tablosunda film_id değeri benzersiz olan kayıtların sayısını döndürür.
 
 ***********************************************************************************************************************************************************************
 
