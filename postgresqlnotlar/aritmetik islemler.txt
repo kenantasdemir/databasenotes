@@ -1,0 +1,20 @@
+SELECT 2 + 3;
+//çıktı -> 5
+
+SELECT 2*3;
+//çıktı 6 
+
+SELECT 10/5 AS RESULT;
+//işlemin sonucunu RESULT isimli bir sütuna yazdırır.
+
+SELECT 14 % 4 AS KALAN;
+//bölme işleminden kalan değeri KALAN isimli bir sütuna yazdırır.
+
+
+= eşit ise true döner
+!= eşit değilse true döner
+<> iki operand eşit mi değil mi kontrol eder. eşit değilse true döner
+>
+<
+>=
+<=

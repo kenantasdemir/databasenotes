@@ -1,0 +1,33 @@
+CREATE VIEW customer_view AS
+SELECT customer_id, first_name, last_name, email
+FROM customers;
+//Bu örnekte, "customer_view" adında bir view oluşturuyoruz ve "customers" tablosundan 
+//"customer_id", "first_name", "last_name" ve "email" sütunlarını seçiyoruz.
+
+SELECT * FROM customer_view;
+//Daha sonra bu view'ı kullanarak, müşteri bilgilerine daha kolay bir şekilde erişebilirsiniz. 
+
+
+DROP VIEW customer_view CASCADE/RESTRICT;
+
+**CASCADE:** Silinen bir görünüm başka bir viewdeki veriye referans oluyorsa yani başka view , silinecek olan tabloya bağlıysa ; bağlılığı kaldırır, görünümü siler.(foreign key olması durumunda örneğin)
+
+**RESTRICT:** Yukarıdaki durumun tam tersidir. Yani başka bir view bu silinecek olan viewe bağlıysa silme işlemini reddeder.
+
+
+CREATE OR REPLACE VIEW sehirler AS
+SELECT * FROM users WHERE city="İstanbul" OR city="İzmir"
+
+View Avantajları
+Veri bağımsızlığı 
+Geçerlilik 
+Geliştirilmiş Güvenlik 
+Azaltılmış Karmaşıklık
+Kolaylık 
+İsteğe göre düzenleme
+Veri bütünlüğü 
+
+View dezavantajları
+Güncelleme Kısıtlaması
+Yapı Kısıtlaması
+Performan

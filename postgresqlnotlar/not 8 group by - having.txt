@@ -1,0 +1,53 @@
+
+SELECT customer_id FROM payment GROUP BY customer_id;
+//payment tablosunda customer_id değerlerini çeker gruplamayı yine customer_id değerine göre yapar.
+
+SELECT customer_id AS musteri, SUM(amount) AS musteri_toplam_odeme FROM payment GROUP BY customer_id;
+
+SELECT customer_id AS musteri, SUM(amount) AS musteri_toplam_odeme FROM payment GROUP BY customer_id ORDER_BY amount DESC;
+//payment tablosunda yer alan customer_id sütununu musteri , amount sütununun toplamını musteri_toplam_odeme olarak çeker
+//customer_id ' ye göre sıralama yapar.
+//amount miktarına göre ASC(artan) olarak sıralar.
+
+SELECT customer_id AS musteri, SUM(amount) AS musteri_toplam_odeme FROM payment GROUP BY customer_id ORDER_BY SUM(amount) DESC;
+//payment tablosunda yer alan customer_id sütunu musteri takma ismiyle, amount sütununun toplamı ise musteri_toplam_odeme olarak isimlendirilir.
+//customer_id değerine göre gruplanır. her grup için amount sütunun toplamını sıralar.
+//amount sütunun toplamına göre DESC(azalan) bir şekilde sıralanır.
+
+
+****************************************************************************************************************************************************************************
+
+GROUP BY ile HAVING beraber kullanılır, çünkü GROUP BY ile WHERE beraber kullanılamaz
+burada HAVING anahtar kelimesi WHERE filtresinin yaptığı işi yapar..
+
+SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id;
+
+SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id HAVING SUM(amount) > 200;
+//payment tablosunda amount sütunun toplamı 200 den büyükse customer_id, amount sütunun toplamı çekilir
+//customer_id'ye göre gruplanır. her grup için amount sütunun toplamı hesaplanır.
+
+SELECT * FROM customer;
+
+SELECT store_id, COUNT(customer_id) FROM customer GROUP BY store_id HAVING COUNT(customer_id) > 300;
+//store_id değerine göre gruplanır.her grup için customer_id sütununun sayısı hesaplanır
+//300 den büyük olan kayıtların store_id değeri ve customer_id sayısı hesaplanır
+
+SELECT customer_id, SUM(amount) FROM payment GROUP BY customer_id HAVING SUM(amount) > 200;
+//customer_id değerine göre gruplar her grup için amount sütununun toplamı 200den büyük olan kayıtların
+//customer_id, amount sütununun toplam değeri getirilir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

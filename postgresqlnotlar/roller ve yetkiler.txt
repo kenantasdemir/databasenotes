@@ -1,0 +1,42 @@
+| Read | Tablodan veri okuma |
+| Insert | Tabloya veri yazma |
+| Update | Tablodaki verileri güncelleme |
+| Delete | Tablodaki verileri silme |
+| Index | Tablo üzerinde index tanımlayabilme |
+| Resources | Tablolar üzerinde ilişki tanımlayabilme |
+| Alteration | Tablonun değiştirilmesi |
+| Drop | Tablonun silinmesi |
+| All Priveleges | Tüm yetkiler tanınır |
+| Select | Bir tablodan veri alma yetkisi |
+| References | Bütünlük kısıtlamalarında belirtilen tablonun referans sütunları(?) |
+| Usage | Alan, tanımlama ve karakter kümeleri kullanma yetkisi |
+
+
+GRANT SELECT, INSERT ON Users TO kenant42;
+//kenant42 kullanıcısına Users tablosunda okuma ve ekleme izni verildi.
+
+REVOKE INSERT ON Users FROM kenant42;
+//kenant42 kullanıcısına verilen INSERT işlemi geri alındı.
+
+ROLE, veritabanı yönetim sistemlerinde kullanıcı yetkilendirme işlemlerini kolaylaştırmak amacıyla kullanılan bir yapıdır. 
+ROLE'ler, benzer izinlere sahip kullanıcıları gruplandırmak ve bu gruplara aynı izinleri kolayca verebilmek için kullanılır.
+Kullanıcıya yetki vermek yerine ROLE veririz.
+
+CREATE ROLE my_role;
+GRANT my_role TO my_user;
+GRANT my_role ON Users TO my_user;
+
+REVOKE INSERT TO my_role;
+
+
+DROP ROLE my_role;
+
+GRANT ALL PRIVILEGES ON STAFF TO MANAGER WITH GRANT OPTION
+//bir tablonun rolü başka tabloya verildi.
+
+
+GRANT ALL select, update(salary) on personeller TO kenant42, director
+//personeller tablosunda SELECT ve UPDATE işlemi kenant42 ve director isimli kullanıcıya verildi.
+
+
+

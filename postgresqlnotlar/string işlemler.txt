@@ -1,0 +1,108 @@
+
+SELECT first_name || ' ' || last_name FROM employees;
+//employees tablosundan first_name ve last_name bilgilerinin arasına bir boşluk ekleyerek döndürür.
+
+SELECT employee_id, first_name || ' ' || last_name AS full_name FROM employees;
+//first_name ve last_name sütununu birleştirerek çeker sütun ismi olarak full_name yazar
+
+SELECT employee_id NO, first_name || ' ' || last_name FROM employees;
+//yukarıdaki sorgunun aynısıdır fakat burada AS kullanılmmamıştır
+//AS kullanmadan da sütunlara takma isim verebiliriz
+
+
+SELECT first_name || ' ' || last_name AS full_name FROM employees;
+//first_name ve last_name değerlerinin aralarına bir boşluk ekleyerek çeker
+//sütuna takma isim olarak full_name değerini verir.
+
+
+
+SELECT 'Kenan' || 'Taşdemir' AS full_name;
+//iki string ifade || birleştirme operatörü ile birleştirildi
+//çıktın yazılacağı sütuna full_name takma adı verildi.
+
+SELECT 'Kenan' || ' ' || 'Taşdemir' AS full_name;
+//iki string aralarına boşluk eklenerek birleştirildi.
+
+SELECT 'Maaş' || ' ' || 500::text AS data;
+//500::text ifadesi ile "500" ifadesi elde edildi(type casting)
+//daha sonra "Maas" || " " || "500" as data
+//burada da iki string aralarına boşluk eklenerek birleştirildi.
+
+SELECT 'ABC' || NULL AS Result;
+//null ile yapılan her işlem nulldır.
+
+SELECT CONCAT('Concat',' ','function')
+//iki string ifadeyi aralarına bir boşluk ekleyerek birleştirir. Bunu built-in fonksiyonlarla yapar.
+
+SELECT CONCAT(first_name, ' ',last_name) AS "full_name" FROM employees;
+//tablodan first_name ve last_name bilgilerini çeker aralarına boşluk ekler
+//sütuna full_name takma ismini verir.
+
+SELECT CONCAT('NULL veri birleştir ',NULL) AS data;
+//Concat fonksiyonu iki string ifadeyibirleştirir. null string olmadığı için işlem yapamaz
+//"NULL veri birleştir" string ifadeyi data takma isimli sütuna yazacaktır.
+
+SELECT CONCAT('NULL veri birleştir ', 5::text) AS data;
+//5::text ile 5 sayısı stringe dönüştürüldü
+//iki stringi birleştirdikten sonra data takma isimli sütuna yazdırılır.
+
+SELECT first_name, CONCAT('Adınız ',LENGTH(first_name)::text,' karakter içeriyor.') FROM employees;
+//LENGTH(first_name)::text ile string uzunluğu hesaplandı ve stringe dönüştürüldü.
+//daha sonra 3 string birleştirildi
+//Ahmet Adınız 5 karakter içeriyor. gibi bir çıktı elde edilecek
+
+SELECT CONCAT_WS(', ', last_name,first_name) AS full_name FROM employees ORDER BY last_name;
+//employees tablosundan first_name ve last_name bilgilerini çeker birleştirir full_name takma isimli sütuna yazar
+last_name değerine göre sıralar.
+//ayraç olarak , kullanılır. 
+Örnek çıktı
+Doe, John
+
+
+SELECT CHAR_LENGTH('PostgreSQL');
+//verilen char karakterin uzunluğunu döner
+
+SELECT LENGTH("uzunluk");
+//verilen stringin uzunluğunu döner
+
+SELECT LOWER("MERHABA");
+//büyük harfleri küçük harfe dönüştürür.
+
+SELECT UPPER("nasilsin");
+//küçük harfleribüyük harfe dönüştürür.
+
+SELECT SUBSTR("kenantasdemir.com",2,4);
+//string ifadenin 2 karakterinden itibaren 4 karakterlik bir substring elde eder.
+
+SELECT SUBSTR("kenantasdemir.com",LENGTH('kenantasdemir.com')-2,4);
+
+SELECT POSITION('ha' in 'Merhaba');
+//ha string ifadenin Merhaba dizgesi içindeki konumunu dönderir.
+
+SELECT ASCII('A')
+SELECT ASCII('a')
+//verilen karakterlerin ASCII kodunu dönderir.
+
+SELECT CONCAT('metinsel',2,NULL,2);
+//verilen ifadeleri birleştirir. NULL ifadesini atlar.
+--metinsel22
+
+SELECT 'Post' || 'greSQL';
+//iki string ifade birleştirildi.
+
+SELECT 'Post' || NULL || 'greSQL';
+--NULL ile yapılan her işlem NULL ile sonuçlanır..
+
+SELECT 'Post' || 3 || 'greSQL';
+//verilen ifadeleri birleştirir.
+--Post3greSQL
+
+SELECT INITCAP('hi Hello');
+--Hi Hello çıktısını verir.(baş harfi büyük hale getirir.)
+
+SELECT REPEAT('hi',3);
+//string ifadeti 3 kere ard arda yazdırır.
+
+SELECT REVERSE('olleh');
+//verilen string ifadeyi tersine çevirir.
+

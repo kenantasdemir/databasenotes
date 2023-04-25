@@ -1,0 +1,266 @@
+SELECT * FROM employees;
+//employees tablosundan bütün verileri getirir.
+
+SELECT employee_id FROM employees;
+//employees tablosundan sadece employee_id sütunundaki verileri getirir.
+
+SELECT employee_id, first_name, last_name, phone_number, hire_date, salary FROM employees;
+//employees tablosundan yukarıda belirtilen sütunları getirir.
+
+SELECT employee_id,first_name, last_name,salary FROM employees WHERE employee_id=101;
+//employee_id değeri 101 olan kaydın employee_id, first_name,last_name,salary bilgilerini çeker
+
+SELECT employee_id,first_name, last_name, salary FROM employees WHERE employee_id <> 105;
+//employee_id değeri 101 olan kayıtlar dı
+//105 id'li hariç hepsini getirir.
+
+***********************************************************************************************************************************************************************
+
+SELECT employee_id, first_name, last_name, salary FROM employees WHERE last_name = 'Doe';
+//last_name değeri "Doe" olan kayıtların yukarıda belirtilen değerlerini getirir.
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE 'Jo%';
+//first_name değeri Jo ile başlayan kayıtları getirir.
+//Jo ile başlaması şarttır fakat Jo'dan sonra her türlü string gelebilir.
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE '%Jo';
+//first_name değeri Jo ile biten kayıtlar
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE '_a%';
+//first_name değeriinin ikinci karakteri a olan kayıtlar +
+//a dan önce sadece bir karakter bulunabilir.
+//a dan sonra gelen string için bir kısıtlama yoktur
+
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE '__a%';
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE '__a_%';
+//first_name değerinin ilk 2 karakterinin ne olduğu önemsizdir.
+//first_name değeriinin 3 karakteri a olmalıdır a'dan sonra minimum 2 karakter daha gelmelidir
+//bir tane underscore için bir tanede % sembolü için
+
+
+SELECT first_name, last_name FROM employees WHERE first_name LIKE 'J__n';
+//ismi J ile başlayıp n ile biten karakterler
+//underscore sayısı gelebilecek karakter sayısını belirtir.
+
+***********************************************************************************************************************************************************************
+
+SELECT * FROM employees ORDER BY employee_id ASC;
+//employees tablosundaki kayıtları employee_id değerine göre sıralar
+//ASC keywordü ASCENDING anlamına gelir ve artan bir şekilde sıralar
+//ASC yerine ASCENDING yazılabilir
+
+
+SELECT * FROM employees ORDER BY employee_id DESC;
+//employees tablosundaki kayıtları employee_id değerine göre sıralar
+//DESC keywordü DESCENDING anlamına gelir ve azalan bir şekilde sıralar
+//DESC yerine DESCENDING yazılabilir
+
+***********************************************************************************************************************************************************************
+
+SELECT DISTINCT film_id FROM inventory ORDER BY film_id ASC
+//DISTINCT anahtar kelimesi ile tabloda belirtilen sütundaki verilerde, eğer aynı veriden birden fazla varsa onlardan sadece birer örek alır. 
+//inventory tablosundaki verilerin film_id değerleri aynı olan kayıtlardan sadece bir tanesini çekerek film_id değerine göre ASC(artan) olarak sıralar.
+
+SELECT COUNT(DISTINCT film_id) FROM inventory
+//inventory tablosunda film_id değeri benzersiz olan kayıtların sayısını döndürür.
+
+***********************************************************************************************************************************************************************
+
+
+SELECT * FROM employees WHERE department_id='1' AND salary >= 6000 AND email='johndoe@gmail.com';
+//department_id değeri 1 olan maaşı 6000 tl olan ve email adresi johndoe@gmail.com olan kaydı getirir.
+
+
+SELECT * FROM employees WHERE employee_id=5 OR employee_id=104
+//employee_id değeri 5 ya da 104 olan kayıtları getirir.
+
+SELECT * FROM employees WHERE employee_id=103 OR employee_id=104 OR employee_id=105;
+//employee_id değeri 103 ,104 ya da 105 olan kayıtları getirir
+
+SELECT * FROM employees WHERE employee_id BETWEEN 101 AND 105;
+//employee_id değeri 101 ile 105 arasında olan kayıtları getirir.
+
+SELECT * FROM employees WHERE employee_id NOT BETWEEN 101 AND 105;
+//employee_id değeri 101 ile 105 arasında olmayan kayıtları getirir.
+
+SELECT * FROM employees WHERE employee_id >= 101 AND employee_id <= 105;
+//employee_id değeri 101 ile 105 arasında olan kayıtları getirir.
+
+***********************************************************************************************************************************************************************
+
+
+
+SELECT * FROM payment WHERE amount > 9.99;
+//payment tablosundan amount değeri 9.99 dan büyük olan kaytları getirir.
+
+SELECT * FROM payment WHERE amount = 9.99;
+//payment tablosundan amount değeri 9.99 olan kayıtları getirir
+
+
+SELECT * FROM payment WHERE amount <> 9.99;
+//payment tablosundan amount değeri 9.99 olan kayıt dışında bütün kayıtları getirir
+
+SELECT * FROM payment WHERE amount != 9.99;
+//payment tablosundan amount değeri 9.99 olan kayıt dışında bütün kayıtları getirir
+
+SELECT * FROM payment WHERE amount >= 9.99;
+//payment tablosundan amount değeri 9.99 'a eşit ya da büyük  olan kaytları getirir.
+
+SELECT * FROM payment WHERE amount <= 9.99;
+//payment tablosundan amount değeri 9.99 'a eşit ya da küçük olan kaytları getirir.
+
+
+***********************************************************************************************************************************************************************
+
+SELECT * FROM employees LIMIT 4;
+//sadece 4 kayıt getirir..
+
+SELECT * FROM employees LIMIT 4 OFFSET 2;
+//employee_id değerine otomatik olarak 2 ekleyerek getirir. 100 den başlayacaksa OFFSET 2 ile 102'den başlar.
+
+SELECT film_id, title, release_year FROM films ORDER BY film_id DESC LIMIT 5;
+//films tablosundan 5 satır veri çeker kayıtların film_id, title,release_year bilgilerini yazdırır.
+//film_id değerine göre listeler.
+
+
+***********************************************************************************************************************************************************************
+
+SELECT customer_id FROM customer;
+UNION
+SELECT customer_id FROM payment;
+//yinelenen değerleri(kesişimler) getirmez
+//çekilen sütunların veri tipi aynı olmalıdır.
+
+SELECT customer_id FROM customer;
+UNION ALL
+SELECT customer_id FROM payment;
+//yinelenen değerleri(kesişimler) getirir.
+
+SELECT customer_id FROM customer
+UNION ALL
+SELECT customer_id FROM payment
+ORDER BY customer_id ASC;
+//her iki tablodaki kayıtların kesişimini çeker
+//daha sonra bu kayıtları customer_id değerine göre ASC(artan) olarak sıralar.
+
+***********************************************************************************************************************************************************************
+
+SELECT store_id FROM customer
+INTERSECT
+SELECT store_id FROM staff
+//customer tablosundaki store_id değeri ile staff tablosundaki store_id değeri aynı olan kayıtları getirir.
+--sadece kesişen kayıtlar getirilir.
+
+
+***********************************************************************************************************************************************************************
+
+SELECT * FROM employees WHERE manager_id IS NULL;
+//employees tablosundan manager_id değeri NULL'a eşit olan kayıtlar getirilir.
+
+SELECT * FROM employees WHERE manager_id IS NOT NULL;
+//employees tablosundan manager_id değeri NULL'a eşit olmayan kayıtlar getirilir.
+
+***********************************************************************************************************************************************************************
+
+SELECT first_name AS fname, last_name FROM employees;
+//first_name ve last_name bilgilerini çeker
+//first_name sütununa fname takma ismini verir.
+
+SELECT first_name "First Name", last_name "Last Name" FROM employees;
+
+SELECT UNIQUE name, surname FROM Users;
+//name ve surname değerleri eşsiz olan kayıtları getirir. tekrar eden kayıtlardan sadece bir örneğini listeler.s
+
+SELECT DISTINCT department_id FROM employees;
+//department_id değeri aynı olan kayıtlardan sadece bir tanesini getirir.
+
+SELECT * FROM employees ORDER BY first_name DESC;
+//employees tablosundan bütün verileri getirir.
+//sıralama yaparken first_name değerlerine bakar
+//alfabetik olarak sıralar.
+
+
+SELECT first_name, last_name, salary, salary*.15 X FROM employees;
+//employees tablosundaki kayıtların first_name,last_name, salary bilgilerini çeker
+//kayıtların salary bilgisininin %15 ini hesaplar ve X takma isimli bir sütuna yazdırır.
+
+
+SELECT employee_id, first_name FROM employees LIMIT 10 OFFSET 2;
+//employees tablosundan ilk 10 kaydın employee_id, first_name,last_name değerlerini çeker
+//OFFSET 2 deyimi ile de bu on kaydın ilk 2 tanesini atlar. 3. kayıttan itibaren yazdırır.
+
+***********************************************************************************************************************************************************************
+
+
+SELECT * FROM film;
+SELECT COUNT(*) FROM film WHERE length < 50;
+//length değeri 50 den küçük olan kayıtların sayısını döndürür.
+
+
+SELECT film_id, title, length INTO TEMP TABLE short_tvSeries FROM film WHERE length < 50
+//film tabosunda length değeri 50 den küçük olan kayıtların film_id,title,length değerlerini short_tvSeries isimli geçici tabloya kaydeder. 
+
+SELECT * FROM short_tvSeries
+SELECT * FROM short_tvSeries WHERE film_id=15;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

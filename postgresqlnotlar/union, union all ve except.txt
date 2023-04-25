@@ -1,0 +1,23 @@
+SELECT name, age FROM customers
+UNION
+SELECT name, age FROM employees;
+//iki sorgu cümlesini bağlayarak yeni bir tablo oluşturur.
+//kısmen join gibi davranır ama join sütunları birleştirirken union satırları birleştirir.
+//union ile oluşturulan sorgularda değerler tekrarsızdır.
+
+
+SELECT first_name, last_name, email FROM customers
+UNION ALL
+SELECT first_name, last_name, email FROM employees;
+//UNION ile aynı işi yapar fakat bu sorgu çalıştırıldığında tekrar eden verilerler karşılaşılabilir.
+
+
+SELECT first_name, last_name FROM customers
+EXCEPT
+SELECT first_name, last_name FROM orders;
+//customers tablosunda bulunan ama orders tablosunda bulunmayan kayıtların first_name ve last_name bilgilerini listeler.
+
+
+
+
+

@@ -1,0 +1,11 @@
+
+CREATE INDEX idx_customer_name ON customers (last_name, first_name);
+//customers tablosunda last_name ve first_name alanları indekslenmiştir.
+//indekslenen nesneler sayesinde verilere hızlı bir şekilde ulaşılır.
+
+DROP INDEX IF EXISTS idx_customer;
+//idx_customer isimli indeks nnesnesi varsa siler
+
+postgresqlde bir indeksi güncellemek mümkün değildir.
+bunun yerine bir indeksi silip yerine başka bir indeks oluşturmalısınız.
+

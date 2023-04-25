@@ -1,0 +1,96 @@
+
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM film;
+//tablodaki tüm kayıtları çeker
+
+SELECT COUNT(*) FROM film;
+//film tablosundaki kayıtların sayısını döndürür.
+
+SELECT COUNT(film_id) FROM film;
+//film tablosundaki kayıtlardan film_id sütununda yer alan kayıtların sayısı döndürür.
+
+SELECT * FROM payment;
+//payment tablosundaki bütün verileri getirir.
+
+SELECT COUNT(DISTINCT amount) FROM payment;
+//payment tablosundaki amount sütununda eşsiz olan verilerin sayısını döndürür.
+
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM film;
+
+SELECT replacement_cost FROM film;
+
+SELECT MAX(amount) FROM payment;
+//payment tablosunda amount sütunundaki en büyük veriyi verir.
+
+SELECT MIN(amount) FROM payment;
+//payment tablosunda amount sütunundaki en küçük veriyi verir.
+
+******************************************************************************************************************************************************************************
+
+SELECT * FROM payment;
+//payment tablosunaki tüm verileri getirir.
+
+SELECT SUM(amount) FROM payment;
+//payment tablosunda amount sütunundaki verilerin toplamını verir.
+
+SELECT SUM(amount) AS ToplamCiro FROM payment;
+//payment tablosunda yer alan amount sütunun toplamını dönderir
+//bunu da ToplamCiro takma isimli sütuna yazdırır.
+
+SELECT SUM(DISTINCT amount) AS ToplamCiro FROM payment;
+//payment tablosunda yer alan amount sütununun eşssiz kayıtlarının toplamını döner
+//ToplamCiro takma isimli sütuna yazdırır.
+
+
+SELECT amount FROM payment;
+//payment tablosundaki amount sütununa ait verileri getirir.
+
+SELECT SUM(DISTINCT customer_id) FROM payment;
+//payment tablsunda customer_id değeri eşsiz olan kayıtların id değerlerinin toplamını verir.
+
+
+******************************************************************************************************************************************************************************
+
+SELECT AVG(price) AS X FROM film;
+//price sütunundaki verilerin ortalamasını alır X takma isimli sütunun altına yazar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
