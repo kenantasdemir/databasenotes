@@ -1,0 +1,77 @@
+--triggerlar transaction olarak çalışırlar
+-- sözde tablolar INSERTED DELETED
+--RAM üzerinde mantıksal olarak bulunur.
+
+
+---     --  TRIGGER aşağıdaki ifadeleri İÇEREMEZ!!  --
+--CREATE DATABASE
+--ALTER DATABASE
+--DROP DATABASE
+--LOAD DATABASE
+--RESTORE DATABASE
+
+--LOAD LOG
+--RESTORE LOG
+-- DISK INIT
+-- DISK RESIZE
+--RECONFIGURE
+
+CREATE TRIGGER locationInsert ON Locations
+AFTER INSERT
+AS 
+BEGIN
+    SELECT "YENİ LOKASYON EKLENDI";
+END;
+
+CREATE TRIGGER locationInsert ON Locations
+AFTER DELETE
+AS 
+BEGIN
+    SELECT "YENİ LOKASYON EKLENDI";
+END;
+
+CREATE TRIGGER locationInsert ON Locations
+AFTER UPDATE
+AS 
+BEGIN
+    SELECT "YENİ LOKASYON EKLENDI";
+END;
+
+CREATE TRIGGER locationInsert ON Locations
+AFTER INSERT, UPDATE, DELETE
+AS 
+BEGIN
+    SELECT "YENİ LOKASYON EKLENDI";
+END;
+
+CREATE TRIGGER trigger_name
+ON table_name
+INSTEAD OF INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Trigger içeriği burada tanımlanır
+END;
+
+
+CREATE TRIGGER triggerName ON DATABASE
+FOR DBLeveledEvents
+AS
+SELECT * FROM Musteriler;
+
+CREATE TRIGGER triggerOrnek
+ON ALL SERVER
+FOR CREATE_TABLE, CREATE_PROCEDURE, CREATE_VIEW
+AS
+ SELECT "Ornek Cikti"
+
+ --FOR DDL_LOGIN_EVENTS
+
+ SELECT * FROM master.sys.server_triggers;
+
+ DISABLE TRIGGER TriggerName;
+ ENABLE TRIGGER TriggerName;
+ DISABLE TRIGGER ALL;
+
+ DROP TRIGGER TriggerName;
+ DROP TRIGGER TriggerName ON DATABASE;
+ DROP TRIGGER TriggerName FOR ALL SERVER;
