@@ -21,7 +21,15 @@ BACKUP DATABASE DBNAME TO DISK='path' WITH DESCRIPTION = "AÇIKLAMA";
 
 
 RESTORE FILELISTONLY FROM DISK = 'path';
+--Bu komut, yedekleme dosyasındaki dosya listelerini döndürür, 
+--ancak yedeği geri yüklemez. Bu, yedeğin hangi veritabanı 
+--dosyalarına sahip olduğunu anlamak için kullanılır.
+
 BACKUP LOG DBDENEME TO DISK = 'path' WITH STATS;
+--veritabanının log dosyasının yedeğini alır. 
+--Veritabanı log dosyası, SQL Server'ın veritabanında 
+--yapılan her türlü değişikliği 
+--(INSERT, UPDATE, DELETE gibi işlemler) kaydeder.
 
 BACKUP LOG DBDENEME TO DISK = 'path' WITH DESCRIPTION = 'DENEME';
 
