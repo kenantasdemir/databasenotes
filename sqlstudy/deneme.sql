@@ -7,7 +7,26 @@
 USE master
 GO
 ALTER DATABASE AdventureWorks SET RECOVERY FULL;
+/*
 
+RECOVERY modunu belirler. Veritabanasının geri dönüşüm (recovery) modunu tanımlar.
+FULL recovery modu, veritabanı yedeği alırken tam yedeklemeyi sağlayan ve geri yükleme işlemleri için en sağlam modu ifade eder. 
+Bu modda, veritabanının tüm işlem günlükleri (transaction logs) tutulur ve bu sayede 
+veritabanı kazalarını, sistem çöküşlerini veya beklenmedik durumları geri alabilmek için 
+tam bir kurtarma yapılabilir.
+
+RECOVERY FULL Modunun Özellikleri:
+Tam Yedekleme ve Günlük Tutma:
+
+FULL recovery modu, işlem günlüklerinin tam olarak tutulmasını sağlar. 
+Bu, veri kaybını minimuma indirir çünkü işlem günlüklerinin tamamı yedeklenir.
+Yani, veritabanı her türlü değişiklik, işlem ve veritabanı güncellemesi hakkında bilgi tutar.
+Yedekleme Türleri:
+
+Tam Yedekleme: Bu, veritabanının tüm verilerini yedekler.
+Artık Yedekleme: Veritabanı işlemleri sırasında yapılan değişikliklerin yalnızca artık kısmını yedekler.
+Günlük Yedekleme: Yapılan tüm işlemleri içerir ve veritabanının herhangi bir noktada geri yüklenmesini sağlar.
+*/
 
 --	Yedekleme S�k��t�rmas� Planlamak
 
@@ -16,6 +35,9 @@ EXEC sp_configure 'backup compression default','1';
 GO
 RECONFIGURE WITH OVERRIDE;
 GO
+
+--SQL Server'da yedeklemeler sıkıştırılabilir ve bu parametre, 
+--yedeklemelerin varsayılan olarak sıkıştırılıp sıkıştırılmayacağını belirler.
 
 
 --	T-SQL ile Veritaban� Yede�i Olu�turmak
@@ -66,11 +88,21 @@ BACKUP DATABASE AdventureWorks
 TO DISK = 'C:\Backups\AWorks7.BAK'
 MIRROR TO DISK = 'C:\Backups\AdventureWorks_MIRROR.BAK'
 WITH FORMAT, STATS, PASSWORD = 'D!�@J#�$B#�$L';
+--Bu, yedeklemenin bir kopyasının (mirror) başka bir dosyaya yapılmasını sağlar.
+--FORMAT seçeneği , önceki yedeklerin silinmesini sağlar ve yalnızca yeni yedekleme dosyası üzerinde işlem yapılır. 
+--Genellikle boş bir dosya oluşturulup üzerine yedekleme yapılması amacıyla kullanılır.
 
 
 RESTORE FILELISTONLY
 FROM DISK = 'C:\Backups\AWorks1.BAK';
+--yedekleme dosyasının içeriklerini görüntülemek için kullanılır.
 
+-- SKIP, yedekleme sırasında herhangi bir uyarıyı görmezden gelmenize olanak tanır.
+-- NOREWIND, Tape sürücüsü kullanırken, yedekleme sonrası bandın başa sarılmaması sağlanır.
+-- NOUNLOAD, genellikle tape sürücüsü ile kullanılır. Tape sürücüsü kullanılıyorsa, yedekleme tamamlandıktan sonra tape'in çıkartılmamasını sağlar.
+-- COMPRESSION, yedekleme dosyasının sıkıştırılmasını sağlar. Bu, özellikle büyük veritabanları için disk alanı tasarrufu sağlar. Yedekleme dosyasının boyutunu küçültmek amacıyla veri sıkıştırılır.
+-- CHECKSUM, yedekleme sırasında veri bütünlüğünü kontrol etmek için kullanılır.
+-- CONTINUE_AFTER_ERROR, yedekleme işlemi sırasında hatalar meydana gelirse bile işlemin devam etmesini sağlar.
 
 BACKUP DATABASE AdventureWorks 
 TO DISK = N'C:\Backups\AWorks10.BAK'
@@ -94,7 +126,6 @@ WITH  FILE = @BackupSetID,
 NOUNLOAD,  
 NOREWIND
 GO
-
 
 --	T-SQL ile Transaction Log Dosyas� Yede�i Olu�turmak
 
