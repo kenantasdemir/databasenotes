@@ -78,6 +78,7 @@ derece varchar (1))
 insert into Kitaplar
 output inserted.KitapRengi,inserted.KitapBaskı,inserted.KitapDerece
 into @yeni values('mavi',21,'a')
+  --output ile elde edilen değerler @yeni adlı tabloya kaydedilir.
 
 select * from @yeni
 
@@ -224,7 +225,7 @@ select * from Kitaplar
 
 
 **********************************************************************************************************************************************
-create procedure Deneme as                             //prosedür oluşturulduktan sonra bu 2 satır silinmelidir.
+create procedure Deneme as                             --prosedür oluşturulduktan sonra bu 2 satır silinmelidir.
 select * from Kitap where KitapSayfa>150
 
 execute Deneme
@@ -256,8 +257,8 @@ select * from Kitaplar
 
 **********************************************************************************************************************************************
 
-create procedure Toplam(@sayi1 int,@sayi2 int,@sonuc int output) as   //bu iki satırı yazdıktan sonra çalıştırıp sil yoksa aynı isimde 2.prosedürü 
-set @sonuc=@sayi1+@sayi2                                              // olusturacağından hata verecektir.
+create procedure Toplam(@sayi1 int,@sayi2 int,@sonuc int output) as   --bu iki satırı yazdıktan sonra çalıştırıp sil yoksa aynı isimde 2.prosedürü 
+set @sonuc=@sayi1+@sayi2                                              -- olusturacağından hata verecektir.
 
 declare @t int
 exec Toplam 4,7,@t output
