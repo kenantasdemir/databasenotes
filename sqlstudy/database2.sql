@@ -1,12 +1,10 @@
-Commit Transaction komutu begin Transaction ile başlayan bütün işleri onaylar. 
-Zaten bir transaction gerçekleşmişse ardından mutlaka Commit transaction gelmesi gerekir.
+--Commit Transaction komutu begin Transaction ile başlayan bütün işleri onaylar. 
+--Zaten bir transaction gerçekleşmişse ardından mutlaka Commit transaction gelmesi gerekir.
 
      BEGIN TRANSACTION
-     SQL KOMUTLARI
-     SQL KOMUTLARI
-     SQL KOMUTLARI...
+          --SQL KOMUTLARI...
      COMMIT TRANSACTION
-Save Transaction komutu ise geri dönüşüm noktası belirler.
+--Save Transaction komutu ise geri dönüşüm noktası belirler.
 
 begin transaction 
 update Kitap set KitapSayfa=50
@@ -16,7 +14,10 @@ select * from Kitap rollback select * from Kitap
 begin transaction 
 update Kitap set KitapSayfa=50
 update Kitap set KitapFiyat=1
-select * from Kitap rollback select * from Kitap
+          
+select * from Kitaplar;
+rollback;
+select * from Kitap
 
 declare @sehir varchar(15)
 set @sehir='KahramanMaraş'
