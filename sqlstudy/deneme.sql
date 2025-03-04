@@ -122,6 +122,8 @@ IF @BackupSetID IS NULL
 BEGIN RAISERROR(N'Do�rulama ba�ar�s�z! ''AdventureWorks2012'' bilgisi bulunamad�.', 16, 1) 
 END 
 RESTORE VERIFYONLY FROM  DISK = N'C:\Backups\AWorks10.BAK'
+-- RESTORE VERIFYONLY: Bu komut, belirtilen yedek dosyasının doğru formatta olup olmadığını ve geri yüklemeye uygun olup olmadığını kontrol eder. 
+--Bu işlem sadece doğrulama yapar, ancak veritabanı geri yüklenmez.
 WITH  FILE = @BackupSetID,  
 NOUNLOAD,  
 NOREWIND
