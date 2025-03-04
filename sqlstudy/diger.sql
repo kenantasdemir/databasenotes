@@ -21,12 +21,14 @@ FROM Products;
 
 CREATE DATABASE DIJIBIL 
 ON  PRIMARY 
+--Bu ifade, veritabanı primary filegroup üzerinde yer alacak olan dosyaların belirtildiğini belirtir.
 ( 
 	NAME = N'DIJIBIL_Data', 
 	FILENAME = N'C:\Databases\DIJIBIL_Data.mdf',
 	SIZE = 21632KB, 
 	MAXSIZE = UNLIMITED, 
 	FILEGROWTH = 16384KB 
+	--her seferinde 16 MB büyür.
 )
 LOG ON 
 ( 
