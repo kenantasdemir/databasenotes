@@ -1,11 +1,12 @@
 SELECT * FROM sys.messages
 sp_addmessage 
-    @msgnum = '3232',
+    @msgnum = '99934',
     @lang = '1055', 
     @severity = 10, 
     @msgtext = "geçerli bir ürün numarası giriniz", 
     @with_log = true;
 
+SELECT * FROM sys.messages WHERE message_id = 99934;
 sp_dropmessage 50010;
 SELECT @@ERROR;
 --oluşan son hatanın kodunu verir
