@@ -61,6 +61,15 @@ WHERE Name LIKE ‘%’ + @ara + ‘%’;
 
 SELECT * FROM dbo.fnc_UrunAra('Be');
 
+
+
+CREATE FUNCTION maleUsers() RETURNS TABLE
+AS
+RETURN SELECT * FROM Users WHERE gender = 'male';
+
+
+SELECT * from maleUsers()
+
 ALTER FUNCTION dbo.KullaniciGetir(@KullniciKod INT = NULL)
 RETURNS VARCHAR(100)
 WITH ENCRYPTION
@@ -72,13 +81,13 @@ FROM Person.Person WHERE BusinessEntityID = @KullniciKod
 RETURN @ad_soyad
 END;
 
-
+/*
 Aldığı aynı parametreler için aynı sonucu döndüren fonksiyonlar
 Deterministic’tir.
 
 Her çalışmasında farklı sonuç üreten fonksiyonlar Nondeterministic’tir. Sistem
 saatini döndüren GETDATE() fonksiyonu buna örnek gösterilebilir. 
-
+*/
 
 --INNER JOIN gibi çalışır
 SELECT * FROM Departments D
