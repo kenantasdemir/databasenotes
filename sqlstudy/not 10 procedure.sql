@@ -207,11 +207,12 @@ EXEC prosedur_ismi @parametre_ismi = deger
 EXEC prosedur_ismi parametre_degeri
 
 EXECUTE AS CALLER
+-- mevcut oturumu başlatan kullanıcının (caller) bağlamında çalışmasını sağlar.
 --DEFAULT
 
 
 EXECUTE AS 'kullanıcı'
-Prosedürü çağıran kişi dışında, başka bir kullanıcı hesabı ile çalışmasını sağlar.
+--Prosedürü çağıran kişi dışında, başka bir kullanıcı hesabı ile çalışmasını sağlar.
 CREATE PROC pr_UrunGetir
     (
     @ProductID INT
@@ -231,6 +232,8 @@ Procedure için bir yönlendirmeli yetkilendirme yapılmaktadır.
 */ 
 
 EXECUTE AS SELF
+-- işlem çalıştıran kullanıcı kimse, işlem o kullanıcının yetkileri ve kimliği ile gerçekleştirilir.
+    
 EXECUTE AS
 ’i tanımlayan ya da değiştiren kullanıcıyı vermek gerektiğinde
 kullanılır. Sahiplik zinciri değişse bile bu durum değişmez.
